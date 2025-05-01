@@ -125,6 +125,20 @@
       font-weight: bold;
       animation: glitch 2s infinite;
     }
+    @keyframes fadeZoomOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+.fade-out {
+  animation: fadeZoomOut 1s ease forwards;
+}
+
 
     @keyframes glitch {
       0% { text-shadow: 1px 0 var(--danger), -1px 0 var(--highlight); }
@@ -152,13 +166,28 @@
 </style>
 </head>
 <body>
+  <div id="intro-screen" style="position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:10000;">
+    <!-- Background video -->
+    <video autoplay muted loop playsinline style="position:absolute;width:100%;height:100%;object-fit:cover;top:0;left:0;z-index:-1;">
+      <source src="finish.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  
+    <!-- Overlay content -->
+    <div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;background:rgba(0,0,0,0.6);">
+      <h1 style="color:#a82cff;font-size:3rem;text-align:center;">Sonex AI</h1>
+      <p style="color:#ccc;text-align:center;margin:1rem 0;">A synthetic teammate engineered in C++</p>
+      <button id="enter-btn" style="padding:1rem 2rem;font-size:1.2rem;background:none;border:2px solid #a82cff;color:#a82cff;border-radius:50px;cursor:pointer;">Enter Site</button>
+    </div>
+  </div>
+
   <audio id="bg-audio" loop>
     <source src="theme.mp3" type="audio/mp3">
   </audio>
+
   <div class="fullpage-hero">
     <h1>Sonex Valorant AI</h1>
     <p>The bot that thinks. Reacts. Talks. Hides. And learns. Built in C++. Undetectable. Unpredictable.</p>
-    <a href="#demo" class="btn">View Demo</a>
   </div>
 
   <section>
@@ -207,53 +236,52 @@
     <p>&copy; 2025 Sonex AI. All rights reserved.</p>
   </footer>
 
-<script>
-const audio = document.querySelector('audio');
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-const source = audioCtx.createMediaElementSource(audio);
-const analyser = audioCtx.createAnalyser();
-source.connect(analyser);
-analyser.connect(audioCtx.destination);
-analyser.fftSize = 256;
+  <script>
+    const audio = document.querySelector('audio');
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const source = audioCtx.createMediaElementSource(audio);
+    const analyser = audioCtx.createAnalyser();
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize = 256;
 
-const bufferLength = analyser.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
 
-function animate() {
-  requestAnimationFrame(animate);
-  analyser.getByteFrequencyData(dataArray);
+    function animate() {
+      requestAnimationFrame(animate);
+      analyser.getByteFrequencyData(dataArray);
 
-  const heroTitle = document.querySelector('.fullpage-hero h1');
-  const sectionTitles = document.querySelectorAll('section h2');
-  const cards = document.querySelectorAll('.tech-grid .card');
+      const heroTitle = document.querySelector('.fullpage-hero h1');
+      const sectionTitles = document.querySelectorAll('section h2');
+      const cards = document.querySelectorAll('.tech-grid .card');
 
-  let avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-  let pulse = Math.floor(avg * 3);
-  let glow = `rgb(${pulse}, 0, ${pulse})`;
+      let avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+      let pulse = Math.floor(avg * 3);
+      let glow = `rgb(${pulse}, 0, ${pulse})`;
 
-  heroTitle.style.textShadow = `0 0 30px ${glow}, 0 0 60px ${glow}`;
-  sectionTitles.forEach(el => {
-    el.style.color = glow;
-    el.style.textShadow = `0 0 15px ${glow}`;
-  });
-  cards.forEach((card) => {
-    card.style.borderLeft = `4px solid ${glow}`;
-  });
-}
+      heroTitle.style.textShadow = `0 0 30px ${glow}, 0 0 60px ${glow}`;
+      sectionTitles.forEach(el => {
+        el.style.color = glow;
+        el.style.textShadow = `0 0 15px ${glow}`;
+      });
+      cards.forEach((card) => {
+        card.style.borderLeft = `4px solid ${glow}`;
+      });
+    }
 
-const startMusic = () => {
-  audio.volume = 0.1;
-  audio.play();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  animate();
-};
+    document.getElementById('enter-btn').addEventListener('click', () => {
+  const intro = document.getElementById('intro-screen');
+  intro.classList.add('fade-out');
 
-
-window.addEventListener('load', () => {
-  audio.volume = 0.1;
-  document.addEventListener('click', startMusic, { once: true });
-  document.addEventListener('scroll', startMusic, { once: true });
-});
-</script>
+      audio.volume = 0.1;
+      audio.play().then(() => {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        animate();
+      }).catch(err => {
+        console.error('Autoplay failed:', err);
+      });
+    });
+  </script>
 </body>
 </html>
