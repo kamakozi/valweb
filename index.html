@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SonexAi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-bg: #0b0b10;
+      --highlight: #a82cff;
+      --text: #eaeaea;
+      --section-bg: #14141b;
+      --danger: #ff004c;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: var(--main-bg);
+      color: var(--text);
+    }
+
+    .fullpage-hero {
+      height: 100vh;
+      background: linear-gradient(to bottom, #1a001e 0%, #000 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .fullpage-hero h1 {
+      font-size: 3.8rem;
+      color: var(--highlight);
+      text-shadow: 0 0 10px var(--highlight);
+    }
+
+    .fullpage-hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      color: #ccc;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      border: 2px solid var(--highlight);
+      color: var(--highlight);
+      background: none;
+      font-weight: bold;
+      border-radius: 50px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--highlight);
+      color: #000;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      background: var(--section-bg);
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      color: var(--highlight);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .tech-grid, .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #1b1b24;
+      padding: 2rem;
+      border-left: 4px solid var(--highlight);
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(168, 44, 255, 0.1);
+    }
+
+    .card h3 {
+      color: var(--highlight);
+      margin-bottom: 1rem;
+    }
+
+    .card p {
+      color: #bbb;
+      line-height: 1.5;
+    }
+
+    .video-container {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .video-container iframe {
+      width: 100%;
+      max-width: 900px;
+      height: 500px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(168, 44, 255, 0.2);
+    }
+
+    footer {
+      background: #0a0a0f;
+      text-align: center;
+      color: #777;
+      padding: 2rem;
+    }
+
+    footer p:first-child {
+      color: var(--highlight);
+      font-weight: bold;
+      animation: glitch 2s infinite;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 1px 0 var(--danger), -1px 0 var(--highlight); }
+      50% { text-shadow: -1px 0 var(--danger), 1px 0 var(--highlight); }
+      100% { text-shadow: 1px 0 var(--danger), -1px 0 var(--highlight); }
+    }
+    body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(white 1px, transparent 1px);
+  background-size: 100px 100px, 150px 150px, 200px 200px;
+  background-position: 0 0, 50px 50px, 100px 100px;
+  background-repeat: repeat;
+  z-index: -1;
+  opacity: 0.25;
+}
+
+</style>
+</head>
+<body>
+  <audio id="bg-audio" loop>
+    <source src="theme.mp3" type="audio/mp3">
+  </audio>
+  <div class="fullpage-hero">
+    <h1>Sonex Valorant AI</h1>
+    <p>The bot that thinks. Reacts. Talks. Hides. And learns. Built in C++. Undetectable. Unpredictable.</p>
+    <a href="#demo" class="btn">View Demo</a>
+  </div>
+
+  <section>
+  <h2>Technology Modules</h2>
+  <div class="tech-grid">
+    <div class="card"><h3>Reflex Engine</h3><p>Real-time movement prediction and pre-aim targeting using low-level C++ memory reads.</p></div>
+    <div class="card"><h3>Awareness Matrix</h3><p>Collects and interprets match flow data like rotations, eco rounds, and ult status.</p></div>
+    <div class="card"><h3>Emulation Layer</h3><p>Mimics human behavior, including fake mic lag, stutters, and timing patterns.</p></div>
+    <div class="card"><h3>Tactical Pinging</h3><p>Knows when, where, and why to ping. Strategic map communication built-in.</p></div>
+    <div class="card"><h3>Aim Logic</h3><p>Recoil compensated flicking, controlled bursts, and pixel-perfect tracking.</p></div>
+    <div class="card"><h3>Stealth System</h3><p>Integrates with Vanguard without triggering detection via custom obfuscation.</p></div>
+    <div class="card"><h3>Memory Core</h3><p>Retains learned experiences across sessions for evolving decision trees.</p></div>
+    <div class="card"><h3>Vocal AI</h3><p>Speaks with teammates using GPT-4 logic and emotional tone simulation.</p></div>
+    <div class="card"><h3>Situational Radar</h3><p>Understands lineups, timing, post-plants, and executes precise counteractions.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Choose Your Arsenal</h2>
+  <div class="pricing-grid">
+    <div class="card">
+      <h3>Starter — €499</h3>
+      <p>✔ Basic comms<br>✔ Voice commands<br>✔ Tactical reactions<br>✘ Stealth<br>✘ Reflex modules</p>
+    </div>
+    <div class="card">
+      <h3>Pro — €999</h3>
+      <p>✔ All Starter features<br>✔ Vanguard bypass<br>✔ Voice + Aim AI<br>✔ Team comm emulation<br>✘ Source access</p>
+    </div>
+    <div class="card">
+      <h3>Ultra — €1999</h3>
+      <p>✔ Full feature unlock<br>✔ C++ core access<br>✔ Obfuscation layer<br>✔ Custom training<br>✔ Priority channel</p>
+    </div>
+  </div>
+</section>
+
+  <section>
+    <h2>Step Into The Shadows</h2>
+    <p style="max-width: 700px; margin: 0 auto 2rem; text-align: center;">The Sonex AI is not just software. It's a silent teammate, a synthetic hunter — crafted in code, refined in combat.</p>
+    <div style="text-align: center;">
+      <a href="https://t.me/sonexDev" class="btn" target="_blank">💬 Telegram for Access</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Developed by Sonex 🇨🇭 — Engineered in Switzerland</p>
+    <p>&copy; 2025 Sonex AI. All rights reserved.</p>
+  </footer>
+
+<script>
+const audio = document.querySelector('audio');
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const source = audioCtx.createMediaElementSource(audio);
+const analyser = audioCtx.createAnalyser();
+source.connect(analyser);
+analyser.connect(audioCtx.destination);
+analyser.fftSize = 256;
+
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+
+function animate() {
+  requestAnimationFrame(animate);
+  analyser.getByteFrequencyData(dataArray);
+
+  const heroTitle = document.querySelector('.fullpage-hero h1');
+  const sectionTitles = document.querySelectorAll('section h2');
+  const cards = document.querySelectorAll('.tech-grid .card');
+
+  let avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+  let pulse = Math.floor(avg * 3);
+  let glow = `rgb(${pulse}, 0, ${pulse})`;
+
+  heroTitle.style.textShadow = `0 0 30px ${glow}, 0 0 60px ${glow}`;
+  sectionTitles.forEach(el => {
+    el.style.color = glow;
+    el.style.textShadow = `0 0 15px ${glow}`;
+  });
+  cards.forEach((card) => {
+    card.style.borderLeft = `4px solid ${glow}`;
+  });
+}
+
+const startMusic = () => {
+  audio.volume = 0.1;
+  audio.play();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  animate();
+};
+
+
+window.addEventListener('load', () => {
+  audio.volume = 0.1;
+  document.addEventListener('click', startMusic, { once: true });
+  document.addEventListener('scroll', startMusic, { once: true });
+});
+</script>
+</body>
+</html>
